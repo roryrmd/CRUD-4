@@ -7,6 +7,7 @@ package tools.menu;
 import daos.CountryDao;
 import daos.DepartmentDao;
 import daos.JobDao;
+import daos.EmployeeDAO;
 import daos.LocationDao;
 import daos.RegionDAO;
 import java.util.Scanner;
@@ -27,6 +28,14 @@ import tools.locations.DeleteLocation;
 import tools.locations.InsertLocation;
 import tools.locations.SelectLocation;
 import tools.locations.UpdateLocation;
+import tools.Employees.DeleteEmployee;
+import tools.Employees.InsertEmployee;
+import tools.Employees.SelectEmployee;
+import tools.Employees.UpdateEmployee;
+import tools.Regions.DeleteRegion;
+import tools.Regions.InsertRegion;
+import tools.Regions.SelectRegion;
+import tools.Regions.UpdateRegion;
 /**
  *
  * @author ACER
@@ -40,6 +49,8 @@ public class OperationMenu {
         RegionDAO regionDao = new RegionDAO(dbConnection.getConnection());
         DepartmentDao departmentDao = new DepartmentDao(dbConnection.getConnection());
         JobDao jobDao = new JobDao(dbConnection.getConnection());
+        EmployeeDAO employeeDao = new EmployeeDAO(dbConnection.getConnection());
+        
         int operationMenu = 0;
         do {
             System.out.println("\nPilihan operasi untuk table " + tableName + ":");
@@ -75,9 +86,19 @@ public class OperationMenu {
                 UpdateDepartment updateDepartment = new UpdateDepartment();
                 updateDepartment.updateDepartments(departmentDao);
             } else if (operationMenu == 1 && tableName.equals("Employees")) {
+                DeleteEmployee deleteEmployee = new DeleteEmployee();
+                deleteEmployee.deleteEmployee(employeeDao);
             } else if (operationMenu == 2 && tableName.equals("Employees")) {
+                InsertEmployee insertEmployee = new InsertEmployee();
+                insertEmployee.insertEmployee(employeeDao);
             } else if (operationMenu == 3 && tableName.equals("Employees")) {
+                SelectEmployee selectEmployee = new SelectEmployee();
+                selectEmployee.selectEmployee(employeeDao);
             } else if (operationMenu == 4 && tableName.equals("Employees")) {
+                SelectEmployee selectEmployee = new SelectEmployee();
+                selectEmployee.selectEmployee(employeeDao);
+                UpdateEmployee updateEmployee = new UpdateEmployee();
+                updateEmployee.updateEmployee(employeeDao);
             } else if (operationMenu == 1 && tableName.equals("Jobs")) {
                 DeleteJob deleteJob = new DeleteJob();
                 deleteJob.deleteJobs(jobDao);
@@ -103,9 +124,17 @@ public class OperationMenu {
                 UpdateLocation updateLocation = new UpdateLocation();
                 updateLocation.updateLocations(locationDao, countryDao);
             } else if (operationMenu == 1 && tableName.equals("Regions")) {
+                DeleteRegion deleteRegion = new DeleteRegion();
+                deleteRegion.deleteEmployee(regionDao);
             } else if (operationMenu == 2 && tableName.equals("Regions")) {
+                InsertRegion insertRegion = new InsertRegion();
+                insertRegion.insertRegion(regionDao);
             } else if (operationMenu == 3 && tableName.equals("Regions")) {
+                SelectRegion selectRegion = new SelectRegion();
+                selectRegion.selectRegion(regionDao);
             } else if (operationMenu == 4 && tableName.equals("Regions")) {
+                UpdateRegion updateRegion = new UpdateRegion();
+                updateRegion.updateRegion(regionDao);
             } else if (operationMenu == 5) {
             } else {
                 System.out.println("Operasi tidak tersedia!");
