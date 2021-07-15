@@ -210,10 +210,6 @@ public class Kelompok_4 {
         }
     } public void insertLocations(LocationDao locationDao, CountryDao countryDao) {
         String streetAddress = "", postalCode = "", city = "", stateProvince = "", countryId = "";
-        int locationId = 0;
-        do {
-            System.out.print("Masukkan Location ID: "); locationId = scanner.nextInt();
-        } while (locationId < 1000);
         System.out.print("Masukkan Street Address: "); scanner.nextLine(); streetAddress = scanner.nextLine();
         System.out.print("Masukkan Postal Code: "); postalCode = scanner.nextLine();
         System.out.print("Masukkan City: "); city = scanner.nextLine();
@@ -223,7 +219,7 @@ public class Kelompok_4 {
         } do {
             System.out.print("Masukkan Country ID yang baru: "); countryId = scanner.next();
         } while (countryId.length() < 2 || countryId.length() > 2);
-        if (locationDao.insert(new Location(locationId, streetAddress, postalCode, city, stateProvince, countryId))) {
+        if (locationDao.insert(new Location(0, streetAddress, postalCode, city, stateProvince, countryId))) {
             System.out.println("Insert data berhasil!");
         } else {
             System.out.println("Insert data gagal!");
