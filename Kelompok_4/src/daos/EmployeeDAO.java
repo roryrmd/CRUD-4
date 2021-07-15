@@ -21,19 +21,19 @@ public class EmployeeDAO {
     
     public List<Employee> getAll() {
         List<Employee> employees = new ArrayList<Employee>();
-        String query = "SELECT * FROM EMPLOYEES ORDER BY Employee_id";
+        String query = "SELECT * FROM EMPLOYEES";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet                 = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                employee e = new employee();
+                Employee e = new Employee();
                 e.setEmployee_id    (resultSet.getInt   (1));
                 e.setFirst_name     (resultSet.getString(2));
                 e.setLast_name      (resultSet.getString(3));
                 e.setEmail          (resultSet.getString(4));
-                e.setPhone_number   (resultSet.getInt   (5));
-                e.setHire_date      (resultSet.getDate  (6));
-                e.setJob_id         (resultSet.getInt   (7));
+                e.setPhone_number   (resultSet.getString(5));
+                e.setHire_date      (resultSet.getString(6));
+                e.setJob_id         (resultSet.getString(7));
                 e.setSalary         (resultSet.getDouble(8));
                 e.setCommission_pct (resultSet.getDouble(9));
                 e.setManager_id     (resultSet.getInt   (10));
@@ -58,9 +58,9 @@ public class EmployeeDAO {
             preparedStatement.setString (2, employee.getFirst_name());
             preparedStatement.setString (3, employee.getLast_name());
             preparedStatement.setString (4, employee.getEmail());
-            preparedStatement.setInt    (4, employee.getPhone_number());
-            preparedStatement.setDate   (6, employee.getHire_date());
-            preparedStatement.setInt    (7, employee.getJob_id());
+            preparedStatement.setString (5, employee.getPhone_number());
+            preparedStatement.setString (6, employee.getHire_date());
+            preparedStatement.setString (7, employee.getJob_id());
             preparedStatement.setDouble (8, employee.getSalary());
             preparedStatement.setDouble (9, employee.getCommission_pct());
             preparedStatement.setInt    (10, employee.getManager_id());
@@ -86,14 +86,15 @@ public class EmployeeDAO {
             preparedStatement.setString (1, employee.getFirst_name());
             preparedStatement.setString (2, employee.getLast_name());
             preparedStatement.setString (3, employee.getEmail());
-            preparedStatement.setInt    (4, employee.getPhone_number());
-            preparedStatement.setDate   (5, employee.getHire_date());
-            preparedStatement.setInt    (6, employee.getJob_id());
+            preparedStatement.setString (4, employee.getPhone_number());
+            preparedStatement.setString (5, employee.getHire_date());
+            preparedStatement.setString (6, employee.getJob_id());
             preparedStatement.setDouble (7, employee.getSalary());
             preparedStatement.setDouble (8, employee.getCommission_pct());
             preparedStatement.setInt    (9, employee.getManager_id());
             preparedStatement.setInt    (10, employee.getDepartment_id());
             preparedStatement.setInt    (11, employee.getEmployee_id());
+            
             preparedStatement.executeQuery();
             result = true;
         } catch (Exception e) {
@@ -103,13 +104,13 @@ public class EmployeeDAO {
         return result;
     }
     
-    public boolean delete(int employee) {
+    public boolean delete(Employee employee) {
         boolean result = false;
         String query = "DELETE FROM EMPLOYEES WHERE employee_id=? ";
         
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1, employee);
+            preparedStatement.setInt(1, employee.getEmployee_id());
             preparedStatement.executeQuery();
             result = true;
         } catch (Exception e) {
