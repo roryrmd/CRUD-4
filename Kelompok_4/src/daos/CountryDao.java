@@ -4,14 +4,12 @@
  * and open the template in the editor.
  */
 package daos;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import models.Country;
-
 /**
  *
  * @author ACER

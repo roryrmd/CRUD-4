@@ -10,7 +10,6 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import models.Location;
-//import models.Region;
 /**
  *
  * @author ACER
