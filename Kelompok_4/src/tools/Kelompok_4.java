@@ -6,10 +6,15 @@
 package tools;
 
 import daos.CountryDao;
+import daos.EmployeeDAO;
 import daos.LocationDao;
 import java.util.Scanner;
 import models.Country;
 import models.Location;
+import daos.RegionDAO;
+import java.sql.Date;
+import models.Employee;
+import models.Region;
 
 /**
  *
@@ -63,9 +68,10 @@ public class Kelompok_4 {
         } while (tableMenu < 1 || tableMenu > 7 || tableMenu != 7);
     } public void chooseOperation(String tableName) {
         DBConnection dbConnection = new DBConnection();
-        CountryDao countryDao = new CountryDao(dbConnection.getConnection());
+        CountryDao countryDao   = new CountryDao(dbConnection.getConnection());
         LocationDao locationDao = new LocationDao(dbConnection.getConnection());
-        RegionDao regionDao = new RegionDao(dbConnection.getConnection());
+        RegionDAO regionDao     = new RegionDAO(dbConnection.getConnection());
+        EmployeeDAO employeeDAO = new EmployeeDAO(dbConnection.getConnection());
         do {
             System.out.println("\nPilihan operasi untuk table " + tableName + ":");
             System.out.println("1. Delete.");
@@ -91,7 +97,7 @@ public class Kelompok_4 {
             } else if (operationMenu == 4 && tableName.equals("Departments")) {
                 updateDepartments();
             } else if (operationMenu == 1 && tableName.equals("Employees")) {
-                deleteEmployees();
+                deleteEmployees(employeeDAO);
             } else if (operationMenu == 2 && tableName.equals("Employees")) {
                 insertEmployees();
             } else if (operationMenu == 3 && tableName.equals("Employees")) {
@@ -139,7 +145,7 @@ public class Kelompok_4 {
         } else {
             System.out.println("Delete data gagal!");
         }
-    } public void insertCountries(CountryDao countryDao, RegionDao regionDao) {
+    } public void insertCountries(CountryDao countryDao, RegionDAO regionDao) {
         String countryId = "", countryName = "";
         int regionId = 0;
         do {
@@ -159,7 +165,7 @@ public class Kelompok_4 {
         for (Country country : countryDao.getAll()) {
             System.out.println(country.toString());
         }
-    } public void updateCountries(CountryDao countryDao, RegionDao regionDao) {
+    } public void updateCountries(CountryDao countryDao, RegionDAO regionDao) {
         String countryId = "", countryName = "";
         int regionId = 0;
         System.out.println("");
@@ -190,9 +196,45 @@ public class Kelompok_4 {
     } public void insertDepartments() {
     } public void selectDepartments() {
     } public void updateDepartments() {
-    } public void deleteEmployees() {
+    } public void deleteEmployees(EmployeeDAO employeeDAO) {
+        int employee_id = 0;
+        for (Employee employee : employeeDAO.getAll()) {
+            System.out.println(employee.toString());
+            }
+        
+        System.out.print("Pilih Employee ID yang ingin dihapus: "); employee_id = scanner.nextInt();
+        
+        if (employeeDAO.delete(employee_id)) {
+            System.out.println("Delete data berhasil!");
+        } else {
+            System.out.println("Delete data gagal!");
+        }
     } public void insertEmployees() {
+        int phone_number = 0, job_id = 0, manager_id = 0, department_id = 0, employee_id = 0;
+        String first_name = "", last_name = "", email = "", hire_date = "";
+        double salary = 0, commission_pct = 0;
+        
+        System.out.print("Masukkan Employee ID: "          ); employee_id    = scanner.nextInt();
+        System.out.print("Masukkan Employee First Name: "  ); first_name     = scanner.nextLine();
+        System.out.print("Masukkan Employee Last Name: "   ); last_name      = scanner.nextLine();
+        System.out.print("Masukkan Employee Email: "       ); email          = scanner.nextLine();
+        System.out.print("Masukkan Employee Hire Date: "   ); hire_date      = scanner.nextLine();
+        System.out.print("Masukkan Employee Phone Number: "); phone_number   = scanner.nextInt();
+        System.out.print("Masukkan Job ID: "               ); job_id         = scanner.nextInt();
+        System.out.print("Masukkan Manager ID: "           ); manager_id     = scanner.nextInt();
+        System.out.print("Masukkan Department ID: "        ); department_id  = scanner.nextInt();
+        System.out.print("Masukkan Salary: "               ); salary         = scanner.nextInt();
+        System.out.print("Masukkan Commission PCT: "       ); commission_pct = scanner.nextInt();
+        
     } public void selectEmployees() {
+        for (Employee employee : employeeDAO.getAll()) {
+            System.out.println(employee.getId_employee() + " || " + employee.getFirst_name()+
+                    " || "+ employee.getLast_name()+
+                    " || "+ employee.getEmail() + " || " + employee.getPhone_number()+
+                    " || " + employee.getJob_id() + " || " + employee.getSalary() +
+                    " || " + employee.getCommission_pct() + " || " + employee.getManager_id() +
+                    " || " + employee.getDepartment_id() + " || " + employee.getHire_date());
+        }
     } public void updateEmployees() {
     } public void deleteJobs() {
     } public void insertJobs() {

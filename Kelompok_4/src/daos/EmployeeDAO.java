@@ -26,9 +26,18 @@ public class EmployeeDAO {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet                 = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Employee e = new Employee();
-                e.setEmployee_id (resultSet.getInt(1));
-                e.setLast_name   (resultSet.getString(2));
+                employee e = new employee();
+                e.setEmployee_id    (resultSet.getInt   (1));
+                e.setFirst_name     (resultSet.getString(2));
+                e.setLast_name      (resultSet.getString(3));
+                e.setEmail          (resultSet.getString(4));
+                e.setPhone_number   (resultSet.getInt   (5));
+                e.setHire_date      (resultSet.getDate  (6));
+                e.setJob_id         (resultSet.getInt   (7));
+                e.setSalary         (resultSet.getDouble(8));
+                e.setCommission_pct (resultSet.getDouble(9));
+                e.setManager_id     (resultSet.getInt   (10));
+                e.setDepartment_id  (resultSet.getInt   (11));
                 employees.add(e);
             }
         } catch (Exception e) {
@@ -94,13 +103,13 @@ public class EmployeeDAO {
         return result;
     }
     
-    public boolean delete(Employee employee) {
+    public boolean delete(int employee) {
         boolean result = false;
         String query = "DELETE FROM EMPLOYEES WHERE employee_id=? ";
         
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1, employee.getEmployee_id());
+            preparedStatement.setInt(1, employee);
             preparedStatement.executeQuery();
             result = true;
         } catch (Exception e) {
