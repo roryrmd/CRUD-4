@@ -17,7 +17,7 @@ public class RegionDAO {
     
       public List<Region> getAll() {
         List<Region> regions = new ArrayList<Region>();
-        String query = "SELECT * FROM REGIONS ORDER BY region_id";
+        String query = "SELECT * FROM REGIONS";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
