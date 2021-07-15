@@ -44,15 +44,14 @@ public class LocationDao {
         } return listLocation;
     } public boolean insert(Location location) {
         boolean result = false;
-        String query = "INSERT INTO LOCATIONS VALUES(?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO LOCATIONS VALUES(LOCATIONS_SEQ.NEXTVAL, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1, location.getLocationId());
-            preparedStatement.setString(2, location.getStreetAddress());
-            preparedStatement.setString(3, location.getPostalCode());
-            preparedStatement.setString(4, location.getCity());
-            preparedStatement.setString(5, location.getStateProvince());
-            preparedStatement.setString(6, location.getCountryId());
+            preparedStatement.setString(1, location.getStreetAddress());
+            preparedStatement.setString(2, location.getPostalCode());
+            preparedStatement.setString(3, location.getCity());
+            preparedStatement.setString(4, location.getStateProvince());
+            preparedStatement.setString(5, location.getCountryId());
             preparedStatement.executeQuery();
             result = true;
         } catch (Exception e) {
