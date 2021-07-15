@@ -90,13 +90,13 @@ public class DepartmentDao {
         return result;
     }
     
-    public boolean delete(Department department) {
+    public boolean delete(int department) {
         boolean result = false;
         String query = "DELETE FROM departments WHERE department_id=?";
         
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1, department.getDepartmentId());
+            preparedStatement.setInt(1, department);
             preparedStatement.executeQuery();
             result = true;
         } catch (Exception e) {

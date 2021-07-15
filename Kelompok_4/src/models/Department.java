@@ -15,6 +15,17 @@ public class Department {
     private int managerId;
     private int locationId;
 
+    public Department(int departmentId, String departmentName, int managerId, int locationId) {
+        this.departmentId = departmentId;
+        this.departmentName = departmentName;
+        this.managerId = managerId;
+        this.locationId = locationId;
+    }
+    
+    public Department() {
+        
+    }
+
     public void setDepartmentId(int departmentId) {
         this.departmentId = departmentId;
     }

@@ -10,16 +10,27 @@ package models;
  * @author abiyyuramadhan
  */
 public class Job {
-    private int jobId;
+    private String jobId;
     private String jobTitle;
     private int minSalary;
     private int maxSalary;
 
-    public void setJobId(int jobId) {
+    public Job(String jobId, String jobTitle, int minSalary, int maxSalary) {
+        this.jobId = jobId;
+        this.jobTitle = jobTitle;
+        this.minSalary = minSalary;
+        this.maxSalary = maxSalary;
+    }
+    
+    public Job() {
+        
+    }
+    
+    public void setJobId(String jobId) {
         this.jobId = jobId;
     }
 
-    public int getJobId() {
+    public String getJobId() {
         return jobId;
     }
 

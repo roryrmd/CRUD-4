@@ -34,7 +34,7 @@ public class JobDao {
             while(resultSet.next()) {
                 Job job = new Job();
                 
-                job.setJobId(resultSet.getInt(1));
+                job.setJobId(resultSet.getString(1));
                 job.setJobTitle(resultSet.getString(2));
                 job.setMinSalary(resultSet.getInt(3));
                 job.setMaxSalary(resultSet.getInt(4));
@@ -52,11 +52,11 @@ public class JobDao {
         boolean result = false;
         
         String query = 
-                "INSERT INTO jobs(job_id, job_title, min_xalary, max_salary) VALUES(?,?,?,?)";
+                "INSERT INTO jobs(job_id, job_title, min_salary, max_salary) VALUES(?,?,?,?)";
         
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1, job.getJobId());
+            preparedStatement.setString(1, job.getJobId());
             preparedStatement.setString(2, job.getJobTitle());
             preparedStatement.setInt(3, job.getMinSalary());
             preparedStatement.setInt(4, job.getMaxSalary());
@@ -73,14 +73,14 @@ public class JobDao {
     public boolean update(Job job) {
         boolean result = false;
         
-        String query = "UPDATE jobs SET job_title=?, min_saalary=?, max_salary=? WHERE job_id=?";
+        String query = "UPDATE jobs SET job_title=?, min_salary=?, max_salary=? WHERE job_id=?";
         
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, job.getJobTitle());
             preparedStatement.setInt(2, job.getMinSalary());
             preparedStatement.setInt(3, job.getMaxSalary());
-            preparedStatement.setInt(4, job.getJobId());
+            preparedStatement.setString(4, job.getJobId());
             preparedStatement.executeQuery();
             
             result = true;
@@ -91,13 +91,15 @@ public class JobDao {
         return result;
     }
     
-    public boolean delete(Job job) {
+    public boolean delete(String job) {
         boolean result = false;
         String query = "DELETE FROM jobs WHERE job_id=?";
         
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1, job.getJobId());
+            preparedStatement.setString(1, job);
+            preparedStatement.executeQuery();
+            
             result = true;
         } catch (Exception e) {
             e.printStackTrace();

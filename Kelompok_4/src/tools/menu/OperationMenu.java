@@ -5,6 +5,8 @@
  */
 package tools.menu;
 import daos.CountryDao;
+import daos.DepartmentDao;
+import daos.JobDao;
 import daos.LocationDao;
 import daos.RegionDAO;
 import java.util.Scanner;
@@ -13,6 +15,14 @@ import tools.countries.DeleteCountry;
 import tools.countries.InsertCountry;
 import tools.countries.SelectCountry;
 import tools.countries.UpdateCountry;
+import tools.departments.DeleteDepartment;
+import tools.departments.InsertDepartment;
+import tools.departments.SelectDepartment;
+import tools.departments.UpdateDepartment;
+import tools.jobs.DeleteJob;
+import tools.jobs.InsertJob;
+import tools.jobs.SelectJob;
+import tools.jobs.UpdateJob;
 import tools.locations.DeleteLocation;
 import tools.locations.InsertLocation;
 import tools.locations.SelectLocation;
@@ -28,6 +38,8 @@ public class OperationMenu {
         CountryDao countryDao = new CountryDao(dbConnection.getConnection());
         LocationDao locationDao = new LocationDao(dbConnection.getConnection());
         RegionDAO regionDao = new RegionDAO(dbConnection.getConnection());
+        DepartmentDao departmentDao = new DepartmentDao(dbConnection.getConnection());
+        JobDao jobDao = new JobDao(dbConnection.getConnection());
         int operationMenu = 0;
         do {
             System.out.println("\nPilihan operasi untuk table " + tableName + ":");
@@ -51,17 +63,33 @@ public class OperationMenu {
                 UpdateCountry updateCountry = new UpdateCountry();
                 updateCountry.updateCountries(countryDao, regionDao);
             } else if (operationMenu == 1 && tableName.equals("Departments")) {
+                DeleteDepartment deleteDepartment = new DeleteDepartment();
+                deleteDepartment.deleteDepartments(departmentDao);
             } else if (operationMenu == 2 && tableName.equals("Departments")) {
+                InsertDepartment insertDepartment = new InsertDepartment();
+                insertDepartment.insertDepartments(departmentDao);
             } else if (operationMenu == 3 && tableName.equals("Departments")) {
+                SelectDepartment selectDepartment = new SelectDepartment();
+                selectDepartment.selectDepartments(departmentDao);
             } else if (operationMenu == 4 && tableName.equals("Departments")) {
+                UpdateDepartment updateDepartment = new UpdateDepartment();
+                updateDepartment.updateDepartments(departmentDao);
             } else if (operationMenu == 1 && tableName.equals("Employees")) {
             } else if (operationMenu == 2 && tableName.equals("Employees")) {
             } else if (operationMenu == 3 && tableName.equals("Employees")) {
             } else if (operationMenu == 4 && tableName.equals("Employees")) {
             } else if (operationMenu == 1 && tableName.equals("Jobs")) {
+                DeleteJob deleteJob = new DeleteJob();
+                deleteJob.deleteJobs(jobDao);
             } else if (operationMenu == 2 && tableName.equals("Jobs")) {
+                InsertJob insertJob = new InsertJob();
+                insertJob.insertJobs(jobDao);
             } else if (operationMenu == 3 && tableName.equals("Jobs")) {
+                SelectJob selectJob = new SelectJob();
+                selectJob.selectJobs(jobDao);
             } else if (operationMenu == 4 && tableName.equals("Jobs")) {
+                UpdateJob updateJob = new UpdateJob();
+                updateJob.updateJobs(jobDao);
             } else if (operationMenu == 1 && tableName.equals("Locations")) {
                 DeleteLocation deleteLocation = new DeleteLocation();
                 deleteLocation.deleteLocations(locationDao);
