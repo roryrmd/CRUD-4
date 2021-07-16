@@ -74,5 +74,59 @@ public class CountryDao {
             e.printStackTrace();
             result = false;
         } return result;
+    } public boolean checkByCountryId(String countryId) {
+        boolean result = false;
+        String query = "SELECT COUNT(*) FROM COUNTRIES WHERE COUNTRY_ID = ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, countryId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            if (resultSet.getInt(1) == 0) {
+                result = true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } return result;
+    } public boolean checkByRegionId(int regionId) {
+        boolean result = false;
+        String query = "SELECT COUNT(*) FROM COUNTRIES WHERE REGION_ID = ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, regionId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            if (resultSet.getInt(1) == 0) {
+                result = true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } return result;
+    } public List<Country> searchByIntegerType(String attribute, int value) {
+        List<Country> listCountry = new ArrayList<Country>();
+        String query = "SELECT * FROM COUNTRIES WHERE " + attribute + " = ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, value);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()) {
+                listCountry.add(new Country(resultSet.getString(1), resultSet.getString(2), resultSet.getInt(3)));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } return listCountry;
+    } public List<Country> searchByStringType(String attribute, String value) {
+        List<Country> listCountry = new ArrayList<Country>();
+        String query = "SELECT * FROM COUNTRIES WHERE " + attribute + " LIKE ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, "%" + value + "%");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()) {
+                listCountry.add(new Country(resultSet.getString(1), resultSet.getString(2), resultSet.getInt(3)));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } return listCountry;
     }
 }

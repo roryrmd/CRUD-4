@@ -18,7 +18,7 @@ public class DBConnection {
         try {
             OracleDataSource oracleDataSource = new OracleDataSource();
             oracleDataSource.setDriverType("thin");
-            oracleDataSource.setPassword("MCC53");
+            oracleDataSource.setPassword("mcc53");
             oracleDataSource.setPortNumber(1521);
             oracleDataSource.setServerName("localhost");
             oracleDataSource.setServiceName("XE");

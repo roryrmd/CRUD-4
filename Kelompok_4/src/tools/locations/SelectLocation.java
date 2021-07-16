@@ -14,7 +14,7 @@ public class SelectLocation {
     public void selectLocations(LocationDao locationDao) {
         System.out.println("");
         for (Location location : locationDao.getAll()) {
-            System.out.println(location.toString());
+            System.out.println(location.getLocationId() + " | " + location.getStreetAddress()+ " | " + location.getPostalCode()+ " | " + location.getCity() + " | " + location.getStateProvince() + " | " + location.getCountryId());
         }
     }
 }

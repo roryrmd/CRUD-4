@@ -15,17 +15,20 @@ import models.Country;
  */
 public class DeleteCountry {
     Scanner scanner = new Scanner(System.in);
+    SelectCountry selectCountry = new SelectCountry();
     public void deleteCountries(CountryDao countryDao) {
         String countryId = "";
-        for (Country country : countryDao.getAll()) {
-            System.out.println(country.toString());
-        } do {
-            System.out.print("Pilih Country ID yang ingin dihapus: "); countryId = scanner.next();
-        } while (countryId.length() < 2 || countryId.length() > 2);
+        selectCountry.selectCountries(countryDao);
+        do {
+            System.out.print("\nPilih Country ID yang ingin dihapus: "); countryId = scanner.next();
+            if (countryDao.checkByCountryId(countryId.toUpperCase())) {
+                System.out.println("Country ID tidak ditemukan!");
+            }
+        } while (countryDao.checkByCountryId(countryId.toUpperCase()));
         if (countryDao.delete(countryId.toUpperCase())) {
             System.out.println("Delete data berhasil!");
         } else {
             System.out.println("Delete data gagal!");
-        }
+        } selectCountry.selectCountries(countryDao);
     }
 }

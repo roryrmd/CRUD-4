@@ -14,18 +14,18 @@ public class MainMenu {
         Scanner scanner = new Scanner(System.in);
         OperationMenu operationMenu = new OperationMenu();
         int tableMenu = 0;
-        System.out.println("==================================================");
-        System.out.println("     Selamat Datang Di Program CRUD HR Schema     ");
-        System.out.println("==================================================");
+        System.out.println("|==================================================|");
+        System.out.println("|     Selamat Datang Di Program CRUD HR Schema     |");
+        System.out.println("|==================================================|");
         do {
-            System.out.println("\nTabel yang tersedia:");
+            System.out.println("\nTable yang tersedia:");
             System.out.println("1. Countries.");
             System.out.println("2. Departments.");
             System.out.println("3. Employees.");
             System.out.println("4. Jobs.");
             System.out.println("5. Locations.");
             System.out.println("6. Regions.");
-            System.out.println("7. Keluar.");
+            System.out.println("Pilih 7 untuk keluar program!");
             System.out.print("Pilih nomor table: "); tableMenu = scanner.nextInt();
             switch (tableMenu) {
                 case 1:

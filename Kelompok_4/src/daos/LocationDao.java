@@ -75,5 +75,59 @@ public class LocationDao {
             e.printStackTrace();
             result = false;
         } return result;
+    } public boolean checkByLocationId(int locationId) {
+        boolean result = false;
+        String query = "SELECT COUNT(*) FROM LOCATIONS WHERE LOCATION_ID = ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, locationId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            if (resultSet.getInt(1) == 0) {
+                result = true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } return result;
+    } public boolean checkByCountryId(String countryId) {
+        boolean result = false;
+        String query = "SELECT COUNT(*) FROM LOCATIONS WHERE COUNTRY_ID = ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, countryId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            if (resultSet.getInt(1) == 0) {
+                result = true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } return result;
+    } public List<Location> searchByIntegerType(String attribute, int value) {
+        List<Location> listLocation = new ArrayList<Location>();
+        String query = "SELECT * FROM LOCATIONS WHERE " + attribute + " = ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, value);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()) {
+                listLocation.add(new Location(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getString(5), resultSet.getString(6)));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } return listLocation;
+    } public List<Location> searchByStringType(String attribute, String value) {
+        List<Location> listLocation = new ArrayList<Location>();
+        String query = "SELECT * FROM LOCATIONS WHERE " + attribute + " LIKE ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, "%" + value + "%");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()) {
+                listLocation.add(new Location(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getString(5), resultSet.getString(6)));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } return listLocation;
     }
 }

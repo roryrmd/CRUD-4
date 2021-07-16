@@ -6,18 +6,22 @@
 package tools.locations;
 import daos.LocationDao;
 import java.util.Scanner;
-import models.Location;
 /**
  *
  * @author ACER
  */
 public class DeleteLocation {
     Scanner scanner = new Scanner(System.in);
+    SelectLocation selectLocation = new SelectLocation();
     public void deleteLocations(LocationDao locationDao) {
         int locationId = 0;
-        for (Location location : locationDao.getAll()) {
-            System.out.println(location.toString());
-        } System.out.print("Pilih Location ID yang ingin dihapus: "); locationId = scanner.nextInt();
+        selectLocation.selectLocations(locationDao);
+        do {
+            System.out.print("\nMasukkan Location ID yang ingin dihapus: "); locationId = scanner.nextInt();
+            if (locationDao.checkByLocationId(locationId)) {
+                System.out.println("Location ID tidak ditemukan!");
+            }
+        } while (locationDao.checkByLocationId(locationId));
         if (locationDao.delete(locationId)) {
             System.out.println("Delete data berhasil!");
         } else {

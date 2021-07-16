@@ -8,39 +8,54 @@ import daos.CountryDao;
 import daos.RegionDAO;
 import java.util.Scanner;
 import models.Country;
-import models.Region;
+import tools.Regions.SelectRegion;
 /**
  *
  * @author ACER
  */
 public class UpdateCountry {
     Scanner scanner = new Scanner(System.in);
+    SelectCountry selectCountry = new SelectCountry();
+    SelectRegion selectRegion = new SelectRegion();
     public void updateCountries(CountryDao countryDao, RegionDAO regionDao) {
         String countryId = "", countryName = "";
         int regionId = 0;
-        System.out.println("");
-        for (Country country : countryDao.getAll()) {
-            System.out.println(country.toString());
-        } do {
-            System.out.print("Masukkan Country ID yang ingin diupdate: ");
+        selectCountry.selectCountries(countryDao);
+        do {
+            System.out.print("\nMasukkan Country ID yang ingin diupdate: ");
             countryId = scanner.next();
-        } while (countryId.length() < 2 || countryId.length() > 2);
+            if (countryDao.checkByCountryId(countryId.toUpperCase())) {
+                System.out.println("Country ID tidak ditemukan!");
+            }
+        } while (countryDao.checkByCountryId(countryId.toUpperCase()));
         System.out.println("");
         for (Country country : countryDao.getAll()) {
             if (country.getCountryId().equalsIgnoreCase(countryId)) {
-                System.out.println("Country Name sebelumnya: " + country.getCountryName() + ".");
-                System.out.print("Masukkan Country Name yang baru: "); scanner.nextLine(); countryName = scanner.nextLine();
-                for (Region region : regionDao.getAll()) {
-                    System.out.println(region.toString());
-                } System.out.println("Region ID sebelumnya: " + country.getRegionId());
-                System.out.print("Masukkan Region ID yang baru: "); regionId = scanner.nextInt();
+                scanner.nextLine();
+                do {
+                    System.out.println("Country Name sebelumnya: " + country.getCountryName() + ".");
+                    System.out.print("Masukkan Country Name yang baru: "); countryName = scanner.nextLine();
+                    if (!isAlphabetWithSpace(countryName)) {
+                        System.err.println("Country Name hanya boleh mengandung huruf!");
+                    }
+                } while (!isAlphabetWithSpace(countryName));
+                selectRegion.selectRegion(regionDao);
+                System.out.println("Region ID sebelumnya: " + country.getRegionId());
+                do {
+                    System.out.print("Masukkan Region ID yang baru: ");
+                    regionId = scanner.nextInt();
+                    if (countryDao.checkByRegionId(regionId)) {
+                        System.out.println("Region ID tidak ditemukan!");
+                    }
+                } while (countryDao.checkByRegionId(regionId));
                 if (countryDao.update(new Country(country.getCountryId().toUpperCase(), countryName, regionId))) {
                     System.out.println("Update data berhasil!");
                 } else {
                     System.out.println("Update data gagal!");
-                }
-                break;
+                } break;
             }
-        }
+        } selectCountry.selectCountries(countryDao);
+    } public boolean isAlphabetWithSpace(String s) {
+        return s != null && s.matches("^[a-zA-Z ]*$");
     }
 }

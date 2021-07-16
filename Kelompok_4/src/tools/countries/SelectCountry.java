@@ -14,7 +14,7 @@ public class SelectCountry {
     public void selectCountries(CountryDao countryDao) {
         System.out.println("");
         for (Country country : countryDao.getAll()) {
-            System.out.println(country.toString());
+            System.out.println(country.getCountryId() + " | " + country.getCountryName() + " | " + country.getRegionId());
         }
     }
 }
