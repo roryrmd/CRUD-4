@@ -16,9 +16,9 @@ public class Employee {
     private String first_name;
     private String last_name; 
     private String email; 
-    private int    phone_number;
-    private Date   hire_date; 
-    private int    job_id;
+    private String phone_number;
+    private String hire_date; 
+    private String job_id;
     private double salary;
     private double commission_pct;
     private int    manager_id;
@@ -56,27 +56,27 @@ public class Employee {
         this.email = email;
     }
 
-    public int getPhone_number() {
+    public String getPhone_number() {
         return phone_number;
     }
 
-    public void setPhone_number(int phone_number) {
+    public void setPhone_number(String phone_number) {
         this.phone_number = phone_number;
     }
 
-    public Date getHire_date() {
+    public String getHire_date() {
         return hire_date;
     }
 
-    public void setHire_date(Date hire_date) {
+    public void setHire_date(String hire_date) {
         this.hire_date = hire_date;
     }
 
-    public int getJob_id() {
+    public String getJob_id() {
         return job_id;
     }
 
-    public void setJob_id(int job_id) {
+    public void setJob_id(String job_id) {
         this.job_id = job_id;
     }
 
@@ -111,6 +111,12 @@ public class Employee {
     public void setDepartment_id(int department_id) {
         this.department_id = department_id;
     }
+
+    @Override
+    public String toString() {
+        return "Employee{" + "employee_id=" + employee_id + ", first_name=" + first_name + ", last_name=" + last_name + ", email=" + email + ", phone_number=" + phone_number + ", hire_date=" + hire_date + ", job_id=" + job_id + ", salary=" + salary + ", commission_pct=" + commission_pct + ", manager_id=" + manager_id + ", department_id=" + department_id + '}';
+    }
+    
     
     
 }

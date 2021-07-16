@@ -1,7 +1,19 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/E:/mcc/githubclonetask/CRUD-4/Kelompok_4/src/tools/DBConnection.java</file>
+        </group>
+    </open-files>
+</project-private>
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+<<<<<<< HEAD
         <group>
             <file>file:/C:/Users/ACER/Documents/GitHub/CRUD-4/Kelompok_4/src/tools/DBConnection.java</file>
             <file>file:/C:/Users/ACER/Documents/GitHub/CRUD-4/Kelompok_4/src/tools/locations/UpdateLocation.java</file>
@@ -9,5 +21,9 @@
             <file>file:/C:/Users/ACER/Documents/GitHub/CRUD-4/Kelompok_4/src/tools/menu/OperationMenu.java</file>
             <file>file:/C:/Users/ACER/Documents/GitHub/CRUD-4/Kelompok_4/src/tools/Kelompok_4.java</file>
         </group>
+=======
+        <group/>
+>>>>>>> 030c9702341c34cbde9cc77f2376dece3d29abec
     </open-files>
 </project-private>
+>>>>>>> 3e873db2c079e5a87c8470cf05ba1026ee6307ff
